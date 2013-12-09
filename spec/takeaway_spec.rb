@@ -18,15 +18,24 @@ let(:takeaway) {Takeaway.new}
     expect(takeaway.price_checker).to eq(12)
   end
 
-
-=begin
   it "should raise an error if the price is not correct" do
-    expect(takeaway.wrong_price).should raise_error(RuntimeError, "sorry, incorrect price")
+    expect(lambda { takeaway.wrong_price }).to raise_error(RuntimeError)
   end
 
-  it "know the time" do
+  it "needs to know the time" do
+    @time_now = Time.parse("2013-12-09 06:55:59 +0000")
+    Time.stub(:now).and_return(@time_now)
     expect(takeaway.time).to eq(Time.now)
   end
-=end
+
+  # TTT gem for writing rspec test with twilio or webmock
+
+  it "needs to send a confirmation message stating the time of delivery" do
+    @twilio_text = send_message.parse("Hi! Thanks for using Chris. Your order is successful and will be delivered at 2013-12-09 08:46:36 +0000")
+    send_message.stub(:message).and_return(@twilio_text)
+    expect(takeaway.send_message) #to send_message ??
+  end
+
+  # I think I must be online to test twilio?
 
 end
