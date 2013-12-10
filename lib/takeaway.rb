@@ -2,31 +2,39 @@ require 'twilio-ruby'
 
 class Takeaway
 
+  # Having a constant makes sense
   MENU = {:pizza => 7, :kebab => 5}
+  # but this should have been a method
   DELIVERY = Time.now + 3600
   #make the time look a bit nicer! e.g 19:36 for delivery. Time.now({ change })  ?? think for rails 
 
+  # if you have a constant, you can use it without this method
   def menu
    MENU
   end
 
+  # like you do here: you don't need the method to use the constant
   def order
-    MENU.each do |key, value|
-    @items = [:pizza, :kebab]
+    # this method always returns MENU because
+    # .each() always returns the array it iterates on
+    # I'm not quite sure what you tried to do here, though
+    MENU.each do |key, value|      
+      @items = [:pizza, :kebab]
     end
   end
 
   def price_checker
+    # This just sums all prices on your menu, not in the customer's order
     (order.values).inject { |a, b| a + b }
     # { |value| sum = yield(sum, value) }
   end
 
-  def wrong_price
-    !price_checker
-    raise "sorry, incorrect price"
+  def wrong_price    
+    # did you mean?
+    raise "sorry, incorrect price" if !price_checker
   end
 
-  def time
+  def time    
     Time.now
   end
 

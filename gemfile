@@ -1,3 +1,7 @@
-Gems
-
-twilio-ruby 3.11.4
+# Chris, well done for using the Gemfile
+# However, you need to follow the syntax very carefully
+# 1. The Gemfile always starts with a capital G, this is important
+# 2. The format is exactly as follows, this is important:
+source "https://www.rubygems.org/"
+gem "twilio-ruby", "3.11.4"
+# 3. If you had everything correctly, then you'd have Gemfile.lock after running 'bundle install'
